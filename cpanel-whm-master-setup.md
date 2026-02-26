@@ -27,14 +27,11 @@ This architecture prioritizes:
 
 ### 1️⃣ Cloudflare DNS (The Foundation)
 
-Configures A records correctly before installation.
-
-Ensures WHM is not improperly proxied and prepares DNS for Cloudflare Tunnel.
-
-Prevents SSL and proxy conflicts later.
+<div>Configures A records correctly before installation.</div>
+<div>Ensures WHM is not improperly proxied and prepares DNS for Cloudflare Tunnel.</div>
+<div>Prevents SSL and proxy conflicts later.</div>
 
 **Purpose**: Clean DNS foundation without BIND dependency.
-
 
 _Before installing cPanel, configure DNS properly._
 

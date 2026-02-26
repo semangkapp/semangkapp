@@ -1,8 +1,7 @@
 🚀 cPanel & WHM Master Setup Guide (2026)
 
-Host: HOST.YOURDOMAIN.TLD
+Host: host.yourdomain.tld
 OS: AlmaLinux 9
-RAM: 8GB
 DNS: Cloudflare (External DNS – No BIND usage)
 
 1️⃣ Cloudflare DNS (The Foundation)

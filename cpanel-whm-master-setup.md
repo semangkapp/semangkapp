@@ -149,7 +149,6 @@ Remove:
 ⚠️ If disabling SSH public access, use:
 
 - Cloudflare Tunnel SSH
-
 - Or restrict SSH to your static IP only
 
 ### 7️⃣ Server DDoS Protection
@@ -157,9 +156,7 @@ Remove:
 #### 7.1 - Network Level
 
 - Use GCP Shielded VM
-
 - Enable provider DDoS protection
-
 - Use Cloudflare proxy for websites
 
 #### 7.2 - Application Level
@@ -233,3 +230,78 @@ We optimize for:
 **Minimal MySQL footprint**
 
 **Low background services**
+
+#### 10.1 - MySQL (If Barely Used)
+
+Edit /etc/my.cnf:
+
+    [mysqld]
+    innodb_buffer_pool_size=512M
+    max_connections=50
+    query_cache_type=0
+
+Restart:
+
+    systemctl restart mysql
+
+#### 10.2 - Apache Optimization
+
+WHM → EasyApache 4
+
+Use:
+
+- MPM Event
+- PHP-FPM only (if needed)
+- Disable unused PHP versions
+- Remove mod_ruid2 if not needed
+
+Apache Config:
+
+    KeepAlive On
+    MaxKeepAliveRequests 100
+    KeepAliveTimeout 2
+
+#### 10.3 - Disable Unused Services
+
+WHM → Service Manager
+
+Disable if unused:
+
+❌ FTP (if not needed)
+❌ WebDisk
+❌ CalDAV/CardDAV
+❌ SpamAssassin (if no email use)
+
+### 1️⃣1️⃣ Resource Surgery (Maximum Performance Mode)
+
+#### 11.1 Swap Setup (If None Exists)
+
+    fallocate -l 2G /swapfile
+    chmod 600 /swapfile
+    mkswap /swapfile
+    swapon /swapfile
+
+Persist:
+
+    echo '/swapfile none swap sw 0 0' >> /etc/fstab
+
+#### 11.2 Tune Kernel
+
+`/etc/sysctl.conf`
+
+    vm.swappiness=10
+    net.core.somaxconn=65535
+    net.ipv4.tcp_max_syn_backlog=4096
+
+Apply:
+
+    sysctl -p
+
+#### 11.3 Disable Unused PHP Modules
+
+Remove:
+
+- intl (if not needed)
+- imap
+- ldap
+- sqlite (if unused)

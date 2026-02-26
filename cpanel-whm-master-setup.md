@@ -1,7 +1,9 @@
 ## 🚀 cPanel & WHM Master Setup Guide (2026)
 
 Host: `subhost.yourdomain.tld`
+
 OS: **AlmaLinux 9**
+
 DNS: **Cloudflare (External DNS – No BIND usage)**
 
 #### 1️⃣ Cloudflare DNS (The Foundation)
@@ -19,34 +21,29 @@ A whm YOUR_GCP_IP 🔘 DNS Only (Grey Cloud)
 
 Login as root via SSH.
 
-2.1 Convert to AlmaLinux (Skip if Already AlmaLinux)
+2.1 - Convert to AlmaLinux (Skip if Already AlmaLinux)
 
-  curl -O https://raw.githubusercontent.com/AlmaLinux/almalinux-deploy/master/almalinux-deploy.sh
-  bash almalinux-deploy.sh
-  reboot
+    curl -O https://raw.githubusercontent.com/AlmaLinux/almalinux-deploy/master/almalinux-deploy.sh
+    bash almalinux-deploy.sh
+    reboot
 
-2.2 Verify OS
+2.2 - Verify OS
 
     cat /etc/redhat-release
 
 Should display AlmaLinux 9.
 
-2.3 Set Hostname (FQDN Required)
+2.3 - Set Hostname (FQDN Required)
 
-  hostnamectl set-hostname HOST.YOURDOMAIN.TLD
+    hostnamectl set-hostname HOST.YOURDOMAIN.TLD
 
-  # Verify:
-  hostname -f
+    # Verify:
+    hostname -f
 
 2.4 SELinux (Correct Approach)
 
 _⚠️ cPanel supports permissive mode, full disabling is not required._
 
-  Recommended:
-
-  setenforce 0
-  sed -i 's/^SELINUX=.*/SELINUX=permissive/' /etc/selinux/config
-
-  Reboot:
-
-  reboot
+    setenforce 0
+    sed -i 's/^SELINUX=.*/SELINUX=permissive/' /etc/selinux/config
+    reboot

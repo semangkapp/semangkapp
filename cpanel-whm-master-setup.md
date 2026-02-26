@@ -2,6 +2,8 @@
 
 Host: `subhost.yourdomain.tld` | OS: **AlmaLinux 9** | DNS: **Cloudflare (External DNS – No BIND usage)**
 
+___
+
 ### 1️⃣ Cloudflare DNS (The Foundation)
 
 _Before installing cPanel, configure DNS properly._

@@ -1,20 +1,24 @@
 # 🚀 cPanel & WHM Master Setup Guide (2026)
+
 Host: `host.yourdomain.tld` | OS: AlmaLinux 9
 
 #### 1️⃣ Cloudflare DNS (The Foundation)
-Before installing cPanel, configure DNS properly.
 
-Go to Cloudflare → DNS and add:
-Type  Name      Content        Proxy    Status
-A     server    YOUR_GCP_IP    🔘       DNS Only (Grey Cloud)
-A     whm       YOUR_GCP_IP    🔘       DNS Only (Grey Cloud)
+_Before installing cPanel, configure DNS properly._
 
-⚠️ Important: Do NOT proxy WHM (2087) through normal orange-cloud unless using Cloudflare Tunnel. Direct proxy will break WHM SSL.
+Go to **Cloudflare** → **DNS** and add:
+Type Name Content Proxy Status
+A server YOUR_GCP_IP 🔘 DNS Only (Grey Cloud)
+A whm YOUR_GCP_IP 🔘 DNS Only (Grey Cloud)
 
-### 2️⃣ OS Preparation (AlmaLinux 9)
+⚠️ Important: _Do NOT proxy WHM (2087) through normal orange-cloud unless using Cloudflare Tunnel. Direct proxy will break WHM SSL._
+
+#### 2️⃣ OS Preparation (AlmaLinux 9)
 
 Login as root via SSH.
+Before installing cPanel, configure DNS properly.
 
+Go to Cloudfl
 2.1 Convert to AlmaLinux (Skip if Already AlmaLinux)
 curl -O https://raw.githubusercontent.com/AlmaLinux/almalinux-deploy/master/almalinux-deploy.sh
 bash almalinux-deploy.sh
@@ -37,13 +41,14 @@ hostname -f
 Recommended:
 
 setenforce 0
-sed -i 's/^SELINUX=.*/SELINUX=permissive/' /etc/selinux/config
+sed -i 's/^SELINUX=.\*/SELINUX=permissive/' /etc/selinux/config
 
 Reboot:
 
 reboot
 
-### 3️⃣ cPanel & WHM Installation
+#### 3️⃣ cPanel & WHM Installation
+
 3.1 Install Required Packages
 dnf update -y
 dnf install perl curl screen -y
@@ -79,7 +84,7 @@ Set:
 
 Nameservers → Leave empty or use Cloudflare placeholder
 
-### 5️⃣ Cloudflare Tunnel (Admin Shield 🔐)
+#### 5️⃣ Cloudflare Tunnel (Admin Shield 🔐)
 
 This hides WHM from public IP completely.
 
@@ -101,19 +106,20 @@ tunnel: <UUID>
 credentials-file: /root/.cloudflared/<UUID>.json
 
 ingress:
-  - hostname: whm.YOURDOMAIN.TLD
-    service: https://localhost:2087
-    originRequest:
-      noTLSVerify: true
-  - service: http_status:404
-5.5 Route DNS
-cloudflared tunnel route dns cp-tunnel whm.YOURDOMAIN.TLD
-5.6 Install Service
-cloudflared service install
-systemctl enable cloudflared
-systemctl start cloudflared
 
-### 6️⃣ Firewall (External Lockdown)
+- hostname: whm.YOURDOMAIN.TLD
+  service: https://localhost:2087
+  originRequest:
+  noTLSVerify: true
+- service: http_status:404
+  5.5 Route DNS
+  cloudflared tunnel route dns cp-tunnel whm.YOURDOMAIN.TLD
+  5.6 Install Service
+  cloudflared service install
+  systemctl enable cloudflared
+  systemctl start cloudflared
+
+#### 6️⃣ Firewall (External Lockdown)
 
 In VPS Firewall Manager:
 
@@ -135,7 +141,8 @@ Cloudflare Tunnel SSH
 
 Or restrict SSH to your static IP only
 
-# 7️⃣ Server DDoS Protection
+#### 7️⃣ Server DDoS Protection
+
 7.1 Network Level
 
 Use GCP Shielded VM
@@ -168,7 +175,7 @@ Port flood protection
 
 Connection tracking
 
-### 8️⃣ Cloudflare Access (Final Guard 🛡)
+#### 8️⃣ Cloudflare Access (Final Guard 🛡)
 
 Cloudflare Zero Trust → Access → Applications
 

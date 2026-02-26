@@ -97,7 +97,7 @@ _This hides WHM from public IP completely._
     dnf install cloudflared -y
 
 #### 5.2 - Authenticate
-    
+
     cloudflared tunnel login
 
 #### 5.3 - Create Tunnel
@@ -154,7 +154,7 @@ Remove:
 
 ### 7️⃣ Server DDoS Protection
 
-#### 7.1 Network Level
+#### 7.1 - Network Level
 
 - Use GCP Shielded VM
 
@@ -162,7 +162,7 @@ Remove:
 
 - Use Cloudflare proxy for websites
 
-#### 7.2 Application Level
+#### 7.2 - Application Level
 
 In WHM:
 
@@ -186,3 +186,59 @@ Enable:
 
 - Connection tracking
 
+### 8️⃣ Cloudflare Access (Final Guard 🛡)
+
+Cloudflare Zero Trust → Access → Applications
+
+Add:
+
+    whm.yourdomain.tld
+
+Policy:
+
+    Email OTP
+
+Now WHM login is protected by:
+
+1. Cloudflare Access
+
+2. Tunnel
+
+3. WHM login itself
+
+Triple-layer security.
+
+### 9️⃣ 8GB RAM — Do We Need "Starvation Mode"?
+
+**No.** If your vpn 8GB RAM is comfortable for cPanel.
+
+
+You do NOT need extreme stripping.
+
+But you should avoid bloat.
+
+Ideal Philosophy:
+
+- Lean but not crippled
+
+- Performance > Features
+
+- Disable what you don't use
+
+### 🔟 WHM Performance Optimization (HTML Powerhouse Mode)
+
+Since you:
+
+- ❌ Don't use WordPress
+
+- ❌ Don't use heavy databases
+
+- ❌ Minimal email usage
+
+- ✅ Serve mostly static HTML
+
+We optimize for:
+
+**Maximum Apache/Nginx efficiency**
+**Minimal MySQL footprint**
+**Low background services**

@@ -171,7 +171,6 @@ In WHM:
 Enable:
 
 - Login protection
-
 - IP-based lockouts
 
 Install:
@@ -181,9 +180,7 @@ Install:
 Enable:
 
 - SYN flood protection
-
 - Port flood protection
-
 - Connection tracking
 
 ### 8️⃣ Cloudflare Access (Final Guard 🛡)
@@ -201,9 +198,7 @@ Policy:
 Now WHM login is protected by:
 
 1. Cloudflare Access
-
 2. Tunnel
-
 3. WHM login itself
 
 Triple-layer security.
@@ -212,7 +207,6 @@ Triple-layer security.
 
 **No.** If your vpn 8GB RAM is comfortable for cPanel.
 
-
 You do NOT need extreme stripping.
 
 But you should avoid bloat.
@@ -220,9 +214,7 @@ But you should avoid bloat.
 Ideal Philosophy:
 
 - Lean but not crippled
-
 - Performance > Features
-
 - Disable what you don't use
 
 ### 🔟 WHM Performance Optimization (HTML Powerhouse Mode)
@@ -230,15 +222,14 @@ Ideal Philosophy:
 Since you:
 
 - ❌ Don't use WordPress
-
 - ❌ Don't use heavy databases
-
 - ❌ Minimal email usage
-
 - ✅ Serve mostly static HTML
 
 We optimize for:
 
 **Maximum Apache/Nginx efficiency**
+
 **Minimal MySQL footprint**
+
 **Low background services**

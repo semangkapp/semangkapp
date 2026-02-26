@@ -114,7 +114,7 @@ Copy the <UUID>.
     credentials-file: /root/.cloudflared/<UUID>.json
 
     ingress:
-      - hostname: whm.YOURDOMAIN.TLD
+      - hostname: whm.yourdomain.tld
         service: https://localhost:2087
         originRequest:
           noTLSVerify: true
@@ -122,10 +122,67 @@ Copy the <UUID>.
 
 #### 5.5 - Route DNS
 
-    cloudflared tunnel route dns cp-tunnel whm.YOURDOMAIN.TLD
+    cloudflared tunnel route dns cp-tunnel whm.yourdomain.tld
 
 #### 5.6 - Install Service
 
     cloudflared service install
     systemctl enable cloudflared
     systemctl start cloudflared
+
+### 6️⃣ Firewall (External Lockdown)
+
+In VPS Firewall Manager:
+
+Allow only:
+
+    TCP: 80, 443
+    TCP: 465, 587
+    TCP: 993, 995
+
+Remove:
+
+    2087 (WHM)
+    2083 (cPanel)
+    22 (SSH) – unless restricted to your IP only
+
+⚠️ If disabling SSH public access, use:
+
+- Cloudflare Tunnel SSH
+
+- Or restrict SSH to your static IP only
+
+### 7️⃣ Server DDoS Protection
+
+#### 7.1 Network Level
+
+- Use GCP Shielded VM
+
+- Enable provider DDoS protection
+
+- Use Cloudflare proxy for websites
+
+#### 7.2 Application Level
+
+In WHM:
+
+    Security Center → cPHulk Brute Force Protection
+
+Enable:
+
+- Login protection
+
+- IP-based lockouts
+
+Install:
+
+    WHM → Plugins → ConfigServer Security & Firewall (CSF)
+
+Enable:
+
+- SYN flood protection
+
+- Port flood protection
+
+- Connection tracking
+

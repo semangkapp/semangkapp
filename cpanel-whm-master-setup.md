@@ -12,13 +12,13 @@ Go to **Cloudflare** → **DNS** and add:
 
 <table>
 <tr>
-<th>Type</th><th>Name</th><th>Content</th><th>Proxy Status</th>
+<th>Type</th><th>Name</th><th>Content</th><th>Proxy</th><th>Status</th>
 </tr>
 <tr>
-<td>A</th><th>server</th><th>YOUR_GCP_IP</th><th>🔘</th><th>DNS Only (Grey Cloud)</th>
+<td>A</td><td>server</td><td>YOUR_GCP_IP</td><td>🔘</td><td>DNS Only (Grey Cloud)</td>
 </tr>
 <tr>
-<td>A</th><th>whm</th><th>YOUR_GCP_IP</th><th>🔘</th><th>DNS Only (Grey Cloud)</td>
+<td>A</td><td>whm</td><td>YOUR_GCP_IP</td><td>🔘</td><td>DNS Only (Grey Cloud)</td>
 </tr>
 </table>
 

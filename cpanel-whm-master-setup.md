@@ -2,9 +2,39 @@
 
 Host: `subhost.yourdomain.tld` | OS: **AlmaLinux 9** | DNS: **Cloudflare (External DNS – No BIND usage)**
 
+This guide walks through building a secure, high-performance cPanel & WHM server on AlmaLinux 9 (2026 edition) using:
+
+- Cloudflare DNS (no BIND)
+- Cloudflare Tunnel (hidden WHM access)
+- Nginx reverse proxy for performance
+- Strict firewall + SSH hardening
+- DDoS protection strategy
+- Lean MySQL footprint
+- Optimized Apache (MPM Event)
+- Resource tuning for 8GB RAM
+- Monitoring + backup strategy
+
+The objective is not starvation-mode minimalism, but **lean efficiency without bloat** — optimized specifically for static/HTML-heavy workloads with minimal database and email usage.
+
+This architecture prioritizes:
+
+- 🔐 Security first
+- ⚡ Maximum concurrency per GB of RAM
+- 🛡 Reduced attack surface
+- 📈 Predictable performance under load
+
 ---
 
 ### 1️⃣ Cloudflare DNS (The Foundation)
+
+Configures A records correctly before installation.
+
+Ensures WHM is not improperly proxied and prepares DNS for Cloudflare Tunnel.
+
+Prevents SSL and proxy conflicts later.
+
+**Purpose**: Clean DNS foundation without BIND dependency.
+
 
 _Before installing cPanel, configure DNS properly._
 
@@ -27,6 +57,12 @@ Go to **Cloudflare** → **DNS** and add:
 ---
 
 ### 2️⃣ OS Preparation (AlmaLinux 9)
+
+Converts Rocky (if needed), sets FQDN hostname, and configures SELinux properly (permissive instead of fully disabled).
+
+
+**Purpose**: Prepare a cPanel-compatible, stable OS baseline.
+
 
 Login as root via SSH.
 
@@ -61,6 +97,12 @@ _⚠️ cPanel supports permissive mode, full disabling is not required._
 
 ### 3️⃣ cPanel & WHM Installation
 
+Installs required dependencies and runs the official cPanel installer inside a screen session.
+
+
+**Purpose**: Deploy production-grade control panel correctly and safely.
+
+
 #### 3.1 - Install Required Packages
 
     dnf update -y
@@ -86,7 +128,13 @@ Access WHM:
 
 ### 4️⃣ Disable BIND (Using Cloudflare DNS Only)
 
-Since you're using Cloudflare DNS, you do NOT need BIND.
+Turns off the named service since Cloudflare manages DNS externally.
+
+
+**Purpose**: Reduce memory usage and eliminate unnecessary services.
+
+
+_Since you're using Cloudflare DNS, you do NOT need BIND._
 
 In WHM:
 
@@ -107,6 +155,14 @@ Set:
 ---
 
 ### 5️⃣ Cloudflare Tunnel (Admin Shield 🔐)
+
+Hides WHM (port 2087) behind a Cloudflare Tunnel.
+
+WHM is no longer exposed to the public IP.
+
+
+**Purpose**: Eliminate direct attack surface on admin ports.
+
 
 _This hides WHM from public IP completely._
 
@@ -153,6 +209,14 @@ Copy the <UUID>.
 
 ### 6️⃣ Firewall (External Lockdown)
 
+Allows only essential public ports (80, 443, limited mail).
+
+Removes direct access to WHM and SSH (unless IP-restricted).
+
+
+**Purpose**: Strict perimeter control.
+
+
 In VPS Firewall Manager:
 
 Allow only:
@@ -175,6 +239,17 @@ Remove:
 ---
 
 ### 7️⃣ Server DDoS Protection
+
+Combines:
+
+- Cloudflare WAF & proxy
+- VPS provider network protection
+- cPHulk
+- CSF firewall rules
+
+
+*Purpose*: Multi-layer DDoS and brute-force mitigation.
+
 
 #### 7.1 - Network Level
 
@@ -206,6 +281,12 @@ Enable:
 ---
 
 ### 8️⃣ Cloudflare Access (Final Guard 🛡)
+
+Adds Email OTP authentication before the WHM login page is even visible.
+
+
+*Purpose*: Zero Trust access model for admin endpoints.
+
 
 Cloudflare Zero Trust → Access → Applications
 
@@ -244,6 +325,12 @@ Ideal Philosophy:
 ---
 
 ### 🔟 WHM Performance Optimization (HTML Powerhouse Mode)
+
+Optimizes Apache (MPM Event), reduces MySQL allocation, disables unused services, and focuses on static performance.
+
+
+**Purpose**: Convert cPanel into a static-site optimized server.
+
 
 Since you:
 
@@ -304,6 +391,12 @@ Disable if unused:
 ---
 
 ### 1️⃣1️⃣ Resource Surgery (Maximum Performance Mode)
+
+Adds swap if needed and tunes sysctl parameters for better concurrency and connection handling.
+
+
+**Purpose**: Improve stability under load spikes.
+
 
 #### 11.1 Swap Setup (If None Exists)
 

@@ -3,7 +3,7 @@
 Host: `host.yourdomain.tld` | OS: AlmaLinux 9
 
 #### 1️⃣ Cloudflare DNS (The Foundation)
-
+***
 _Before installing cPanel, configure DNS properly._
 
 Go to **Cloudflare** → **DNS** and add:

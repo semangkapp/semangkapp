@@ -55,11 +55,9 @@ Go to **Cloudflare** → **DNS** and add:
 
 ### 2️⃣ OS Preparation (AlmaLinux 9)
 
-Converts Rocky (if needed), sets FQDN hostname, and configures SELinux properly (permissive instead of fully disabled).
-
+<div>Converts Rocky (if needed), sets FQDN hostname, and configures SELinux properly (permissive instead of fully disabled).</div>
 
 **Purpose**: Prepare a cPanel-compatible, stable OS baseline.
-
 
 Login as root via SSH.
 
@@ -94,11 +92,9 @@ _⚠️ cPanel supports permissive mode, full disabling is not required._
 
 ### 3️⃣ cPanel & WHM Installation
 
-Installs required dependencies and runs the official cPanel installer inside a screen session.
-
+<div>Installs required dependencies and runs the official cPanel installer inside a screen session.</div>
 
 **Purpose**: Deploy production-grade control panel correctly and safely.
-
 
 #### 3.1 - Install Required Packages
 
@@ -125,11 +121,9 @@ Access WHM:
 
 ### 4️⃣ Disable BIND (Using Cloudflare DNS Only)
 
-Turns off the named service since Cloudflare manages DNS externally.
-
+<div>Turns off the named service since Cloudflare manages DNS externally.</div>
 
 **Purpose**: Reduce memory usage and eliminate unnecessary services.
-
 
 _Since you're using Cloudflare DNS, you do NOT need BIND._
 
@@ -153,13 +147,9 @@ Set:
 
 ### 5️⃣ Cloudflare Tunnel (Admin Shield 🔐)
 
-Hides WHM (port 2087) behind a Cloudflare Tunnel.
-
-WHM is no longer exposed to the public IP.
-
+<div>Hides WHM (port 2087) behind a Cloudflare Tunnel.</div>
 
 **Purpose**: Eliminate direct attack surface on admin ports.
-
 
 _This hides WHM from public IP completely._
 
@@ -206,13 +196,10 @@ Copy the <UUID>.
 
 ### 6️⃣ Firewall (External Lockdown)
 
-Allows only essential public ports (80, 443, limited mail).
-
-Removes direct access to WHM and SSH (unless IP-restricted).
-
+<div>Allows only essential public ports (80, 443, limited mail).</div>
+<div>Removes direct access to WHM and SSH (unless IP-restricted).</div>
 
 **Purpose**: Strict perimeter control.
-
 
 In VPS Firewall Manager:
 
@@ -244,9 +231,7 @@ Combines:
 - cPHulk
 - CSF firewall rules
 
-
-*Purpose*: Multi-layer DDoS and brute-force mitigation.
-
+**Purpose**: Multi-layer DDoS and brute-force mitigation.
 
 #### 7.1 - Network Level
 
@@ -279,11 +264,9 @@ Enable:
 
 ### 8️⃣ Cloudflare Access (Final Guard 🛡)
 
-Adds Email OTP authentication before the WHM login page is even visible.
+<div>Adds Email OTP authentication before the WHM login page is even visible.</div>
 
-
-*Purpose*: Zero Trust access model for admin endpoints.
-
+**Purpose**: Zero Trust access model for admin endpoints.
 
 Cloudflare Zero Trust → Access → Applications
 
@@ -323,11 +306,9 @@ Ideal Philosophy:
 
 ### 🔟 WHM Performance Optimization (HTML Powerhouse Mode)
 
-Optimizes Apache (MPM Event), reduces MySQL allocation, disables unused services, and focuses on static performance.
-
+<div>Optimizes Apache (MPM Event), reduces MySQL allocation, disables unused services, and focuses on static performance.</div>
 
 **Purpose**: Convert cPanel into a static-site optimized server.
-
 
 Since you:
 
@@ -338,11 +319,9 @@ Since you:
 
 We optimize for:
 
-**Maximum Apache/Nginx efficiency**
-
-**Minimal MySQL footprint**
-
-**Low background services**
+<strong>Maximum Apache/Nginx efficiency</strong>
+<strong>Minimal MySQL footprint</strong>
+<strong>Low background services</strong>
 
 #### 10.1 - MySQL (If Barely Used)
 
@@ -389,11 +368,9 @@ Disable if unused:
 
 ### 1️⃣1️⃣ Resource Surgery (Maximum Performance Mode)
 
-Adds swap if needed and tunes sysctl parameters for better concurrency and connection handling.
-
+<div>Adds swap if needed and tunes sysctl parameters for better concurrency and connection handling.</div>
 
 **Purpose**: Improve stability under load spikes.
-
 
 #### 11.1 Swap Setup (If None Exists)
 

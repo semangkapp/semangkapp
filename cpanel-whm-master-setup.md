@@ -9,9 +9,18 @@ Host: `subhost.yourdomain.tld` | OS: **AlmaLinux 9** | DNS: **Cloudflare (Extern
 _Before installing cPanel, configure DNS properly._
 
 Go to **Cloudflare** → **DNS** and add:
-Type Name Content Proxy Status
-A server YOUR_GCP_IP 🔘 DNS Only (Grey Cloud)
-A whm YOUR_GCP_IP 🔘 DNS Only (Grey Cloud)
+
+<table>
+<tr>
+<th>Type</th><th>Name</th><th>Content</th><th>Proxy Status</th>
+</tr>
+<tr>
+<td>A</th><th>server</th><th>YOUR_GCP_IP</th><th>🔘</th><th>DNS Only (Grey Cloud)</th>
+</tr>
+<tr>
+<td>A</th><th>whm</th><th>YOUR_GCP_IP</th><th>🔘</th><th>DNS Only (Grey Cloud)</td>
+</tr>
+</table>
 
 ⚠️ Important: **Do NOT proxy WHM (2087) through normal orange-cloud unless using Cloudflare Tunnel. Direct proxy will break WHM SSL.**
 

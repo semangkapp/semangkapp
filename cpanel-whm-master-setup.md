@@ -1,5 +1,5 @@
 # 🚀 cPanel & WHM Master Setup Guide (2026)
-Host: host.yourdomain.tld
+"""Host: host.yourdomain.tld"""
 OS: AlmaLinux 9
 
 ### 1️⃣ Cloudflare DNS (The Foundation)
@@ -14,7 +14,7 @@ A	whm	YOUR_GCP_IP	🔘 DNS Only (Grey Cloud)
 
 ### 2️⃣ OS Preparation (AlmaLinux 9)
 
-Login as root via SSH.
+''Login as root via SSH.''
 
 2.1 Convert to AlmaLinux (Skip if Already AlmaLinux)
 curl -O https://raw.githubusercontent.com/AlmaLinux/almalinux-deploy/master/almalinux-deploy.sh

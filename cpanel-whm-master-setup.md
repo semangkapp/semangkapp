@@ -64,7 +64,7 @@ _⚠️ cPanel supports permissive mode, full disabling is not required._
 #### 3.1 - Install Required Packages
 
     dnf update -y
-    dnf install perl curl screen -y
+    dnf install perl curl screen git wget fail2ban python3 python-is-python3  -y
 
 #### 3.2 Start Screen Session
 

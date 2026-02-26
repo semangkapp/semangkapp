@@ -3,7 +3,7 @@ Host: host.yourdomain.tld
 OS: AlmaLinux 9
 
 ### 1️⃣ Cloudflare DNS (The Foundation)
-Before installing cPanel, configure DNS properly.
+'''Before installing cPanel, configure DNS properly.'''
 
 Go to Cloudflare → DNS and add:
 Type	Name	Content	Proxy Status

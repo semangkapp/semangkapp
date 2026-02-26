@@ -1,5 +1,6 @@
 # 🚀 cPanel & WHM Master Setup Guide (2026)
-Host: `host.yourdomain.tld`\n
+Host: `host.yourdomain.tld`
+
 OS: AlmaLinux 9
 
 ### 1️⃣ Cloudflare DNS (The Foundation)

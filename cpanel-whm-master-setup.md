@@ -1,8 +1,8 @@
-## 🚀 cPanel & WHM Master Setup Guide (2026)
+# 🚀 cPanel & WHM Master Setup Guide (2026)
 Host: host.yourdomain.tld
 OS: AlmaLinux 9
 
-# 1️⃣ Cloudflare DNS (The Foundation)
+### 1️⃣ Cloudflare DNS (The Foundation)
 Before installing cPanel, configure DNS properly.
 
 Go to Cloudflare → DNS and add:
@@ -12,7 +12,7 @@ A	whm	YOUR_GCP_IP	🔘 DNS Only (Grey Cloud)
 
 ⚠️ Important: Do NOT proxy WHM (2087) through normal orange-cloud unless using Cloudflare Tunnel. Direct proxy will break WHM SSL.
 
-# 2️⃣ OS Preparation (AlmaLinux 9)
+### 2️⃣ OS Preparation (AlmaLinux 9)
 
 Login as root via SSH.
 
@@ -44,7 +44,7 @@ Reboot:
 
 reboot
 
-# 3️⃣ cPanel & WHM Installation
+### 3️⃣ cPanel & WHM Installation
 3.1 Install Required Packages
 dnf update -y
 dnf install perl curl screen -y
@@ -80,7 +80,7 @@ Set:
 
 Nameservers → Leave empty or use Cloudflare placeholder
 
-# 5️⃣ Cloudflare Tunnel (Admin Shield 🔐)
+### 5️⃣ Cloudflare Tunnel (Admin Shield 🔐)
 
 This hides WHM from public IP completely.
 
@@ -114,7 +114,7 @@ cloudflared service install
 systemctl enable cloudflared
 systemctl start cloudflared
 
-# 6️⃣ Firewall (External Lockdown)
+### 6️⃣ Firewall (External Lockdown)
 
 In VPS Firewall Manager:
 
@@ -169,7 +169,7 @@ Port flood protection
 
 Connection tracking
 
-# 8️⃣ Cloudflare Access (Final Guard 🛡)
+### 8️⃣ Cloudflare Access (Final Guard 🛡)
 
 Cloudflare Zero Trust → Access → Applications
 

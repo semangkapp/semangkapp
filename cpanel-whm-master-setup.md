@@ -2,7 +2,7 @@
 
 Host: `subhost.yourdomain.tld` | OS: **AlmaLinux 9** | DNS: **Cloudflare (External DNS – No BIND usage)**
 
-____________________________________
+---
 
 ### 1️⃣ Cloudflare DNS (The Foundation)
 
@@ -14,6 +14,8 @@ A server YOUR_GCP_IP 🔘 DNS Only (Grey Cloud)
 A whm YOUR_GCP_IP 🔘 DNS Only (Grey Cloud)
 
 ⚠️ Important: **Do NOT proxy WHM (2087) through normal orange-cloud unless using Cloudflare Tunnel. Direct proxy will break WHM SSL.**
+
+---
 
 ### 2️⃣ OS Preparation (AlmaLinux 9)
 
@@ -46,6 +48,8 @@ _⚠️ cPanel supports permissive mode, full disabling is not required._
     sed -i 's/^SELINUX=.*/SELINUX=permissive/' /etc/selinux/config
     reboot
 
+---
+
 ### 3️⃣ cPanel & WHM Installation
 
 #### 3.1 - Install Required Packages
@@ -69,6 +73,8 @@ Access WHM:
 
     https://YOUR_SERVER_IP:2087
 
+---
+
 ### 4️⃣ Disable BIND (Using Cloudflare DNS Only)
 
 Since you're using Cloudflare DNS, you do NOT need BIND.
@@ -88,6 +94,8 @@ Then:
 Set:
 
     Nameservers → Leave empty or use Cloudflare placeholder
+
+---
 
 ### 5️⃣ Cloudflare Tunnel (Admin Shield 🔐)
 
@@ -132,6 +140,8 @@ Copy the <UUID>.
     systemctl enable cloudflared
     systemctl start cloudflared
 
+---
+
 ### 6️⃣ Firewall (External Lockdown)
 
 In VPS Firewall Manager:
@@ -152,6 +162,8 @@ Remove:
 
 - Cloudflare Tunnel SSH
 - Or restrict SSH to your static IP only
+
+---
 
 ### 7️⃣ Server DDoS Protection
 
@@ -182,6 +194,8 @@ Enable:
 - Port flood protection
 - Connection tracking
 
+---
+
 ### 8️⃣ Cloudflare Access (Final Guard 🛡)
 
 Cloudflare Zero Trust → Access → Applications
@@ -202,6 +216,8 @@ Now WHM login is protected by:
 
 Triple-layer security.
 
+---
+
 ### 9️⃣ 8GB RAM — Do We Need "Starvation Mode"?
 
 **No.** If your vpn 8GB RAM is comfortable for cPanel.
@@ -215,6 +231,8 @@ Ideal Philosophy:
 - Lean but not crippled
 - Performance > Features
 - Disable what you don't use
+
+---
 
 ### 🔟 WHM Performance Optimization (HTML Powerhouse Mode)
 
@@ -273,6 +291,8 @@ Disable if unused:
 ❌ WebDisk
 ❌ CalDAV/CardDAV
 ❌ SpamAssassin (if no email use)
+
+---
 
 ### 1️⃣1️⃣ Resource Surgery (Maximum Performance Mode)
 
